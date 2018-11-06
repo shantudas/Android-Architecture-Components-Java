@@ -1,53 +1,52 @@
-package com.snipex.shantu.androidarchitecturecomponentsversionjava.view;
+package com.snipex.shantu.androidarchitecturecomponentsversionjava.view.fragment;
 
-import android.arch.lifecycle.LiveData;
+
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.arch.persistence.room.Room;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.R;
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.adapter.NoteAdapter;
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.database.Note;
-import com.snipex.shantu.androidarchitecturecomponentsversionjava.database.NoteDatabase;
-import com.snipex.shantu.androidarchitecturecomponentsversionjava.repository.NoteRepository;
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.viewModel.NoteViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class NoteListFragment extends Fragment {
 
-public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
-
+    public static final String TAG = NoteListFragment.class.getSimpleName();
     private NoteViewModel noteViewModel;
+    View view;
+
+    public NoteListFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view= inflater.inflate(R.layout.fragment_note_list, container, false);
 
-        RecyclerView recyclerView=findViewById(R.id.rvNotes);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView recyclerView=view.findViewById(R.id.rvNotes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         StaggeredGridLayoutManager sGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(sGridLayoutManager);
         recyclerView.setHasFixedSize(true);
 
         final NoteAdapter noteAdapter=new NoteAdapter();
         recyclerView.setAdapter(noteAdapter);
-
-
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
@@ -64,12 +63,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fabAddNote=findViewById(R.id.fabAddNote);
-        fabAddNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                noteViewModel.insert();
-            }
-        });
+
+
+
+        return view;
     }
+
 }
