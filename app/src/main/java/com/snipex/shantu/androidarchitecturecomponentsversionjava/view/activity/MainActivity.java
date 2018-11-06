@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 NewNoteFragment newNoteFragment=new NewNoteFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
-//                        .addToBackStack("product")
+                        .addToBackStack(NewNoteFragment.TAG)
                         .replace(R.id.fragment_container,
                                 newNoteFragment, NewNoteFragment.TAG).commit();
 

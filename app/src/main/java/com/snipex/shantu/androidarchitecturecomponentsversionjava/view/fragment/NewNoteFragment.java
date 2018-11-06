@@ -60,12 +60,11 @@ public class NewNoteFragment extends Fragment {
                     Note note = new Note(title, body);
                     noteViewModel.insert(note);
 
-                    Fragment fragment = new NoteListFragment();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    NoteListFragment fragment = new NoteListFragment();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragment, NoteListFragment.TAG)
+                            .commit();
 
                     Toast.makeText(getActivity(), "Note Added", Toast.LENGTH_LONG).show();
 

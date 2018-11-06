@@ -17,8 +17,9 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private List<Note> noteList = new ArrayList<Note>();
+    private OnItemClickListener listener;
 
-    public NoteAdapter(){
+    public NoteAdapter() {
 
     }
 
@@ -52,15 +53,33 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         private TextView tvNoteTitle;
         private TextView tvNoteBody;
 
-        public NoteHolder(View itemView) {
+        public NoteHolder(final View itemView) {
             super(itemView);
             tvNoteTitle = (TextView) itemView.findViewById(R.id.tvNoteTitle);
             tvNoteBody = (TextView) itemView.findViewById(R.id.tvNoteBody);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener!=null && position!=RecyclerView.NO_POSITION){
+                        listener.OnItemClick(noteList.get(position));
+                    }
+                }
+            });
         }
     }
 
     public void setNoteList(List<Note> noteList) {
         this.noteList = noteList;
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(Note note);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

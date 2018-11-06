@@ -26,4 +26,8 @@ public interface NoteDao {
     LiveData<List<Note>> fetchAllNotes();
 
 
+    @Query("SELECT * FROM table_notes WHERE id = :itemId")
+    LiveData<Note> getNoteItemById(int itemId);
+
+
 }

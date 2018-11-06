@@ -21,6 +21,10 @@ public class NoteViewModel extends AndroidViewModel {
         this.allNotes = noteRepository.getAllNotes();
     }
 
+    public LiveData<Note> getNoteItem(int itemId){
+        return noteRepository.getNoteItem(itemId);
+    }
+
     public LiveData<List<Note>> getAllNotes() {
         return allNotes;
     }
@@ -29,10 +33,7 @@ public class NoteViewModel extends AndroidViewModel {
         noteRepository.insert(note);
     }
 
-    public void insert(){
-        String title = "This is the title";
-        String body = "This is the description of notes";
-        Note note=new Note(title,body);
-        noteRepository.insert(note);
+    public void update(Note note) {
+        noteRepository.update(note);
     }
 }

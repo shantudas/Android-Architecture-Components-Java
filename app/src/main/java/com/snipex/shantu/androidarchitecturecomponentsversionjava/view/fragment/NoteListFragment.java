@@ -27,6 +27,7 @@ import java.util.List;
 public class NoteListFragment extends Fragment {
 
     public static final String TAG = NoteListFragment.class.getSimpleName();
+    private static final String NOTE_ID ="NOTE_ID" ;
     private NoteViewModel noteViewModel;
     View view;
 
@@ -63,6 +64,21 @@ public class NoteListFragment extends Fragment {
             }
         });
 
+
+        noteAdapter.setOnItemClickListener(new NoteAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Note note) {
+                UpdateNoteFragment updateNoteFragment=new UpdateNoteFragment();
+                Bundle bundle=new Bundle();
+                bundle.putInt(NOTE_ID,note.getId());
+                updateNoteFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, updateNoteFragment, NoteListFragment.TAG)
+                        .addToBackStack(UpdateNoteFragment.TAG)
+                        .commit();
+            }
+        });
 
 
 
