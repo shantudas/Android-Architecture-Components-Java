@@ -1,10 +1,7 @@
 package com.snipex.shantu.androidarchitecturecomponentsversionjava.repository;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.database.Note;
@@ -12,7 +9,6 @@ import com.snipex.shantu.androidarchitecturecomponentsversionjava.database.NoteD
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.database.NoteDatabase;
 
 import java.util.List;
-
 
 
 public class NoteRepository {
@@ -26,23 +22,25 @@ public class NoteRepository {
         allNotes = noteDao.fetchAllNotes();
     }
 
-    public LiveData<Note> getNoteItem(int itemId){
-        return noteDao.getNoteItemById(itemId);
-    }
-
-
     public LiveData<List<Note>> getAllNotes() {
         return allNotes;
     }
 
-    public void insert (Note note) {
+    public LiveData<Note> getNoteItem(int itemId) {
+        return noteDao.getNoteItemById(itemId);
+    }
+
+    public void insert(Note note) {
         new insertAsyncTask(noteDao).execute(note);
     }
 
-    public void update(Note note){
+    public void update(Note note) {
         new updateAsyncTask(noteDao).execute(note);
     }
 
+    public void delete(Note note){
+        new deleteAsyncTask(noteDao).execute(note);
+    }
 
     private static class insertAsyncTask extends AsyncTask<Note, Void, Void> {
 
@@ -59,7 +57,6 @@ public class NoteRepository {
         }
     }
 
-
     private static class updateAsyncTask extends AsyncTask<Note, Void, Void> {
 
         private NoteDao mAsyncTaskDao;
@@ -74,4 +71,21 @@ public class NoteRepository {
             return null;
         }
     }
+
+    private static class deleteAsyncTask extends AsyncTask<Note, Void, Void> {
+
+        private NoteDao mAsyncTaskDao;
+
+        private deleteAsyncTask(NoteDao dao) {
+            this.mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            mAsyncTaskDao.delete(notes[0]);
+            return null;
+        }
+    }
+
+
 }

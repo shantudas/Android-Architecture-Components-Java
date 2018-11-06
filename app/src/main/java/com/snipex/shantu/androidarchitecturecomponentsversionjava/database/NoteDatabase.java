@@ -12,7 +12,7 @@ import android.support.annotation.NonNull;
 @Database(entities = {Note.class}, version = 1, exportSchema = false)
 public abstract class NoteDatabase extends RoomDatabase {
 
-    private static String DB_NAME = "note_database";
+    private static final String DB_NAME = "note_database";
 
     public abstract NoteDao noteDao();
 
@@ -33,7 +33,11 @@ public abstract class NoteDatabase extends RoomDatabase {
         return instance;
     }
 
-    private static NoteDatabase.Callback roomCallBack=new RoomDatabase.Callback(){
+
+    /**
+     * room call back
+     */
+    private static NoteDatabase.Callback roomCallBack = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -41,15 +45,20 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
     };
 
-    private static class populateNoteData extends AsyncTask<Void,Void,Void>{
+    /**
+     * populate data for room callback
+     */
+    private static class populateNoteData extends AsyncTask<Void, Void, Void> {
 
         private NoteDao noteDao;
-        private populateNoteData(NoteDatabase db){
-            noteDao=db.noteDao();
+
+        private populateNoteData(NoteDatabase db) {
+            noteDao = db.noteDao();
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Note("Title from room call back","body"));
+            noteDao.insert(new Note("Title from room call back", "body"));
             return null;
         }
     }
