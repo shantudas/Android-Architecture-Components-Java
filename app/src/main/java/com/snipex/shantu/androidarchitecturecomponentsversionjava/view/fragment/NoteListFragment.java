@@ -13,6 +13,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snipex.shantu.androidarchitecturecomponentsversionjava.R;
@@ -43,6 +44,7 @@ public class NoteListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_note_list, container, false);
 
+        final TextView tvNoteStatus = (TextView) view.findViewById(R.id.tvNoteStatus);
         RecyclerView recyclerView = view.findViewById(R.id.rvNotes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
@@ -53,10 +55,20 @@ public class NoteListFragment extends Fragment {
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         noteList = noteViewModel.getAllNotes();
 
+        if (noteList.getValue() == null) {
+
+        }
+
         noteList.observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
-                noteAdapter.setNoteList(notes);
+
+                if (!notes.isEmpty()) {
+                    noteAdapter.setNoteList(notes);
+                    tvNoteStatus.setVisibility(View.GONE);
+                }else {
+                    tvNoteStatus.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -78,7 +90,7 @@ public class NoteListFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 noteViewModel.delete(noteAdapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(), "Note deleted",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Note deleted", Toast.LENGTH_LONG).show();
             }
         }).attachToRecyclerView(recyclerView);
 
