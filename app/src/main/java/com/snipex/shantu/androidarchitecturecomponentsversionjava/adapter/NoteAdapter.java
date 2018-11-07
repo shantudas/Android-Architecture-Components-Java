@@ -62,12 +62,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if (listener!=null && position!=RecyclerView.NO_POSITION){
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.OnItemClick(noteList.get(position));
                     }
                 }
             });
         }
+    }
+
+
+    public Note getNoteAt(int position) {
+        return noteList.get(position);
     }
 
     public void setNoteList(List<Note> noteList) {

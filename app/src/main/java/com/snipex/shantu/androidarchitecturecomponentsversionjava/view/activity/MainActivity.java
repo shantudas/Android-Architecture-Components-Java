@@ -14,9 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
                         .addToBackStack(NewNoteFragment.TAG)
                         .replace(R.id.fragment_container,
                                 newNoteFragment, NewNoteFragment.TAG).commit();
-
-//                noteViewModel.insert();
             }
         });
     }
