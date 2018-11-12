@@ -21,6 +21,7 @@ In this project we will build a note app using android architecture components <
 ### App Features
 * Create new note
 * Delete an existing note
+* Update an existing note
 * View all existing notes
 
 ## Contributing
