@@ -1,5 +1,7 @@
 # Android-Architecture-Components-Java
 
+<img src="images/android-jetpack.png">
+
 [Android architecture components](https://developer.android.com/topic/libraries/architecture/) are a collection of libraries that help you design robust, testable, and maintainable apps. 
 Android Architecture components is part of new [android jetpack components](https://developer.android.com/jetpack/) which is collection of libraries that are individually adoptable and built to work together.
 
@@ -23,6 +25,9 @@ In this project we will build a note app using android architecture components <
 * Delete an existing note
 * Update an existing note
 * View all existing notes
+
+## App demo 
+<img src="images/app-demo.png">
 
 ## Contributing
 
