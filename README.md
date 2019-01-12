@@ -5,7 +5,7 @@
 [Android architecture components](https://developer.android.com/topic/libraries/architecture/) are a collection of libraries that help you design robust, testable, and maintainable apps. 
 Android Architecture components is part of new [android jetpack components](https://developer.android.com/jetpack/) which is collection of libraries that are individually adoptable and built to work together.
 
-## Android Architecture Components Libraries
+### Android Architecture Components
 
 * [Data Biniding](https://developer.android.com/topic/libraries/data-binding/)-Declaratively bind observable data to UI elements
 * [Lifecycles](https://developer.android.com/topic/libraries/architecture/lifecycle)-Manage your activity and fragment lifecycles
@@ -15,6 +15,12 @@ Android Architecture components is part of new [android jetpack components](http
 * [Room](https://developer.android.com/topic/libraries/architecture/room)-Fluent SQLite database access
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)-Manage UI-related data in a lifecycle-conscious way
 * [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/)-Manage your Android background jobs
+
+## Library used in
+
+* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+* [Room](https://developer.android.com/topic/libraries/architecture/room)
+* [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
 ## About this project
 
