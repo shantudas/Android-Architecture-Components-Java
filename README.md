@@ -1,4 +1,6 @@
-# Android-Architecture-Components-Java
+# Note App Java
+
+## Android Architecture Components
 
 <img src="images/android-jetpack.png">
 
